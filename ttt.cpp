@@ -17,7 +17,7 @@ void empty_board()
 {
     system("cls");  //clear screen for every new game
     cout<<"\nWELCOME TO TIC-TAC-TOE.CPP\n\nHere is the board:\n"<<endl;
-    char squares[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    char squares[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};    //flat array for tiles
     cout << "     |     |     " << endl;
     cout << "  " << squares[0] << "  |  " << squares[1] << "  |  " << squares[2] << endl;
     cout << "_____|_____|_____" << endl;
@@ -30,14 +30,26 @@ void empty_board()
     cout<<"\nRefer to these numbers for tile positions\n";
 }
 
+    //board without numbers.updates every round.
 void draw_board()
 {
-    //board without numbers.
-    //updates every round.
+    cout << "     |     |     " << endl;
+    cout << "     |     |     " << endl;
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+    cout << "     |     |     " << endl;
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+    cout << "     |     |     " << endl;
+    cout << "     |     |     " << endl;
+    
 }
 
 
 
 int main() {
     empty_board();
+    int player = 1; //1 or 2
+    char mark;      //'X' or 'O'
+    draw_board();
 }
