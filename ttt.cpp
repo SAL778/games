@@ -33,14 +33,15 @@ void empty_board()
     //board without numbers.updates every round.
 void draw_board()
 {
+    char squares[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};    //blanks for now. Will update every round
     cout << "     |     |     " << endl;
-    cout << "     |     |     " << endl;
+    cout << "  " << squares[0] << "  |  " << squares[1] << "  |  " << squares[2] << endl;
     cout << "_____|_____|_____" << endl;
     cout << "     |     |     " << endl;
-    cout << "     |     |     " << endl;
+    cout << "  " << squares[3] << "  |  " << squares[4] << "  |  " << squares[5] << endl;
     cout << "_____|_____|_____" << endl;
     cout << "     |     |     " << endl;
-    cout << "     |     |     " << endl;
+    cout << "  " << squares[6] << "  |  " << squares[7] << "  |  " << squares[8] << endl;
     cout << "     |     |     " << endl;
     
 }
