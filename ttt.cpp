@@ -49,17 +49,29 @@ void draw_board()
 }
 
 
-//make move at position x by placing char y
+//make move at position x-1 by placing char y   //x-1 since position is (flat index + 1)
 void make_move(int x, char y) {
     if(x<1 || x>9) {cout<<"Error! Inavlid position. Please try again\n"; return;}
-    if(positions[x] == ' ')
+    if(positions[x-1] == ' ')
     {
+        switch (x)
+        {
+            case 1: positions[0] = y; break;
+            case 2: positions[1] = y; break;
+            case 3: positions[2] = y; break;
+            case 4: positions[3] = y; break;
+            case 5: positions[4] = y; break;
+            case 6: positions[5] = y; break;
+            case 7: positions[6] = y; break;
+            case 8: positions[7] = y; break;
+            case 9: positions[8] = y; break;
+            //default: { cout<<"Error! Inavlid position. Please try again\n"; return; }
+        }
     }
     else{
         cout<<"Position already occupied! Please try again\n"; return;
     }
 }
-
 
 
 int main() {
@@ -69,16 +81,13 @@ int main() {
     int position;     //1...9
     
 
-    do{
-    draw_board();
-
     player=(player%2)?1:2; //alternating between 1 and 2
     printf("\nPlayer %d (%c), enter a position to play: ", player, (player==1)?'X':'O');
     cin>>position;
     mark=(player == 1) ? 'X' : 'O';
 
     make_move(position,mark);
+    player--;
 
-    }while(true);
-
+    draw_board();
 }
