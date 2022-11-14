@@ -49,7 +49,16 @@ void draw_board()
 }
 
 
-void make_move() {}
+//make move at position x by placing char y
+void make_move(int x, char y) {
+    if(x<1 || x>9) {cout<<"Error! Inavlid position. Please try again\n"; return;}
+    if(positions[x] == ' ')
+    {
+    }
+    else{
+        cout<<"Position already occupied! Please try again\n"; return;
+    }
+}
 
 
 
@@ -58,11 +67,18 @@ int main() {
     int player = 1; //1 or 2
     char mark;      //'X' or 'O'
     int position;     //1...9
-    //draw_board();
+    
+
+    do{
+    draw_board();
 
     player=(player%2)?1:2; //alternating between 1 and 2
     printf("\nPlayer %d (%c), enter a position to play: ", player, (player==1)?'X':'O');
     cin>>position;
-    make_move();
+    mark=(player == 1) ? 'X' : 'O';
+
+    make_move(position,mark);
+
+    }while(true);
 
 }
