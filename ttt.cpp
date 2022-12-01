@@ -73,6 +73,11 @@ void make_move(int x, char y) {
     }
 }
 
+int check_win()
+{
+    
+}
+
 
 int main() {
     empty_board();
