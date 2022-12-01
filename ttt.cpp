@@ -73,9 +73,20 @@ void make_move(int x, char y) {
     }
 }
 
+//return 1 for win, 0 for draw, -1 ongoing game
 int check_win()
 {
-    
+    for(int i=0; i<=9; i+=3)
+    {   //check all horizontal win conditions
+        if(positions[i] == positions[i+1] && positions[i+1] == positions[i+2])
+        {return 1;}
+    }
+    for(int i=0; i<3; ++i)
+    {   //check all vertical win conditions
+        if(positions[i] == positions[i+3] && positions[i+3] == positions[i+6])
+        {return 1;}
+    }
+    //check for diagonal wins
 }
 
 
