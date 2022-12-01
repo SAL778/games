@@ -73,6 +73,19 @@ void make_move(int x, char y) {
     }
 }
 
+//returns 1 if game is over and tied, 0 otherwise
+int game_tied()
+{
+    int i;
+    for(i=0; i<9; ++i)
+    {
+        if(positions[i]!=' ') {continue;}
+        return 0;
+    }
+    return 1;
+}
+
+
 //return 1 for win, 0 for draw, -1 ongoing game
 int check_win()
 {
@@ -87,6 +100,13 @@ int check_win()
         {return 1;}
     }
     //check for diagonal wins
+    if(positions[0] == positions[4] && positions[4] == positions[8])
+    {return 1;}
+    if(positions[2] == positions[4] && positions[4] == positions[6])
+    {return 1;}
+    else if (game_tied()) 
+    {return 0;}
+    return -1; //no result yet
 }
 
 
