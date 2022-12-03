@@ -85,6 +85,11 @@ int game_tied()
     return 1;
 }
 
+void win_message(char z)
+{
+    
+}
+
 
 //return 1 for win, 0 for draw, -1 ongoing game
 int check_win()
