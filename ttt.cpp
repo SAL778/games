@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 /*
@@ -16,7 +17,7 @@ void meaningless_board()
 void empty_board()
 {
     system("cls");  //clear screen for every new game
-    cout<<"\nWELCOME TO TIC-TAC-TOE.CPP\n\nHere is the board:\n"<<endl;
+    cout<<"\nWELCOME TO TIC-TAC-TOE.CPP\n\nHere is the board:\n\n"<<endl;
     char squares[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};    //flat array for tiles
     cout << "     |     |     " << endl;
     cout << "  " << squares[0] << "  |  " << squares[1] << "  |  " << squares[2] << endl;
@@ -37,6 +38,7 @@ char positions[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};    //blanks f
 //board without numbers.updates every round.
 void draw_board()
 {
+    cout<<endl;
     cout << "     |     |     " << endl;
     cout << "  " << positions[0] << "  |  " << positions[1] << "  |  " << positions[2] << endl;
     cout << "_____|_____|_____" << endl;
@@ -52,6 +54,7 @@ void draw_board()
 //make move at position x-1 by placing char y   //x-1 since position is (flat index + 1)
 void make_move(int x, char y) {
     if(x<1 || x>9) {cout<<"Error! Inavlid position. Please try again\n"; return;}
+    //assert(x>=1 && x<=9);
     if(positions[x-1] == ' ')
     {
         switch (x)
@@ -69,7 +72,7 @@ void make_move(int x, char y) {
         }
     }
     else{
-        cout<<"Position already occupied! Please try again\n"; return;
+        cout<<"\nPosition already occupied! Please try again.\n"; return;
     }
 }
 
@@ -85,25 +88,47 @@ int game_tied()
     return 1;
 }
 
+void win_message(char *z)
+{
+    if(*z=='X') {
+        cout<<"\nPLAYER 1 (X) WINS!\n\n";
+    }
+    else if(*z=='O'){
+        cout<<"\nPLAYER 2 (O) WINS!\n\n";
+    }
+}
+
 
 //return 1 for win, 0 for draw, -1 ongoing game
 int check_win()
 {
-    for(int i=0; i<=9; i+=3)
+    for(int i=1; i<9; i+=3)
     {   //check all horizontal win conditions
-        if(positions[i] == positions[i+1] && positions[i+1] == positions[i+2])
-        {return 1;}
+        if(positions[i]!=' ' && positions[i] == positions[i+1] && positions[i+1] == positions[i+2])
+        {
+            win_message(&positions[i]);
+            return 1;
+        }
     }
     for(int i=0; i<3; ++i)
     {   //check all vertical win conditions
-        if(positions[i] == positions[i+3] && positions[i+3] == positions[i+6])
-        {return 1;}
+        if(positions[i]!=' ' && positions[i] == positions[i+3] && positions[i+3] == positions[i+6])
+        {
+            win_message(&positions[i]);
+            return 1;
+        }
     }
     //check for diagonal wins
-    if(positions[0] == positions[4] && positions[4] == positions[8])
-    {return 1;}
-    if(positions[2] == positions[4] && positions[4] == positions[6])
-    {return 1;}
+    if(positions[0]!=' ' && positions[0] == positions[4] && positions[4] == positions[8])
+    {
+        win_message(&positions[0]);
+        return 1;
+    }
+    if(positions[2]!=' ' && positions[2] == positions[4] && positions[4] == positions[6])
+    {
+        win_message(&positions[2]);
+        return 1;
+    }
     else if (game_tied()) 
     {return 0;}
     return -1; //no result yet
@@ -112,11 +137,12 @@ int check_win()
 
 int main() {
     empty_board();
-    int player = 1; //1 or 2
-    char mark;      //'X' or 'O'
-    int position;     //1...9
+    int player = 1;      //1 or 2
+    char mark;           //'X' or 'O'
+    int position;        //1...9
+    int f;               //win flag
     
-
+    do {
     player=(player%2)?1:2; //alternating between 1 and 2
     printf("\nPlayer %d (%c), enter a position to play: ", player, (player==1)?'X':'O');
     cin>>position;
@@ -126,4 +152,9 @@ int main() {
     player--;
 
     draw_board();
+    f = check_win();
+    //cout<<"win flag f= "<<f<<endl;
+
+    //draw_board();
+    } while(f==-1);
 }
