@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 /*
@@ -37,6 +38,7 @@ char positions[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};    //blanks f
 //board without numbers.updates every round.
 void draw_board()
 {
+    cout<<endl;
     cout << "     |     |     " << endl;
     cout << "  " << positions[0] << "  |  " << positions[1] << "  |  " << positions[2] << endl;
     cout << "_____|_____|_____" << endl;
@@ -52,6 +54,7 @@ void draw_board()
 //make move at position x-1 by placing char y   //x-1 since position is (flat index + 1)
 void make_move(int x, char y) {
     if(x<1 || x>9) {cout<<"Error! Inavlid position. Please try again\n"; return;}
+    //assert(x>=1 && x<=9);
     if(positions[x-1] == ' ')
     {
         switch (x)
@@ -85,9 +88,14 @@ int game_tied()
     return 1;
 }
 
-void win_message(char z)
+void win_message(char *z)
 {
-    
+    if(*z=='X') {
+        cout<<"\nPLAYER 1 (X) WINS!\n\n";
+    }
+    else if(*z=='O'){
+        cout<<"\nPLAYER 2 (O) WINS!\n\n";
+    }
 }
 
 
@@ -97,18 +105,30 @@ int check_win()
     for(int i=1; i<9; i+=3)
     {   //check all horizontal win conditions
         if(positions[i]!=' ' && positions[i] == positions[i+1] && positions[i+1] == positions[i+2])
-        {return 1;}
+        {
+            win_message(&positions[i]);
+            return 1;
+        }
     }
     for(int i=0; i<3; ++i)
     {   //check all vertical win conditions
         if(positions[i]!=' ' && positions[i] == positions[i+3] && positions[i+3] == positions[i+6])
-        {return 1;}
+        {
+            win_message(&positions[i]);
+            return 1;
+        }
     }
     //check for diagonal wins
     if(positions[0]!=' ' && positions[0] == positions[4] && positions[4] == positions[8])
-    {return 1;}
+    {
+        win_message(&positions[0]);
+        return 1;
+    }
     if(positions[2]!=' ' && positions[2] == positions[4] && positions[4] == positions[6])
-    {return 1;}
+    {
+        win_message(&positions[2]);
+        return 1;
+    }
     else if (game_tied()) 
     {return 0;}
     return -1; //no result yet
@@ -131,9 +151,10 @@ int main() {
     make_move(position,mark);
     player--;
 
+    draw_board();
     f = check_win();
     //cout<<"win flag f= "<<f<<endl;
 
-    draw_board();
+    //draw_board();
     } while(f==-1);
 }
