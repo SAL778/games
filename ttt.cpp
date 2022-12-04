@@ -2,18 +2,6 @@
 #include <cassert>
 using namespace std;
 
-/*
-void meaningless_board()
-{
-    cout << "     |     |     " << endl;
-    cout << "_____|_____|_____" << endl;
-    cout << "     |     |     " << endl;
-    cout << "_____|_____|_____" << endl;
-    cout << "     |     |     " << endl;
-    cout << "     |     |     " << endl;
-}
-*/
-
 void empty_board()
 {
     system("cls");  //clear screen for every new game
@@ -68,7 +56,6 @@ void make_move(int x, char y) {
             case 7: positions[6] = y; break;
             case 8: positions[7] = y; break;
             case 9: positions[8] = y; break;
-            //default: { cout<<"Error! Inavlid position. Please try again\n"; return; }
         }
     }
     else{
@@ -153,8 +140,6 @@ int main() {
 
     draw_board();
     f = check_win();
-    //cout<<"win flag f= "<<f<<endl;
 
-    //draw_board();
     } while(f==-1);
 }
